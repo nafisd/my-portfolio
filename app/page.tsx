@@ -1,5 +1,5 @@
-import HeroSection from "@/components/HeroSection";
-import ProjectCard from "@/components/ProjectCard";
+import AnimatedHero from "@/components/AnimatedHero";
+import ProjectCardAnimated from "@/components/ProjectCardAnimated";
 
 export default function HomePage() {
   const projects = [
@@ -28,15 +28,12 @@ export default function HomePage() {
 
   return (
     <div className="space-y-20">
-      <HeroSection />
-
-      <section>
-        <h2 className="text-3xl font-semibold mb-8 text-center">
-          Featured Projects
-        </h2>
+      <AnimatedHero />
+      <section className="mt-20">
+        <h2 className="text-3xl font-semibold mb-8 text-center">Featured Projects</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((p, i) => (
-            <ProjectCard key={i} {...p} />
+            <ProjectCardAnimated key={i} {...p} />
           ))}
         </div>
       </section>

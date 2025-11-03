@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
 
 export const metadata = {
   title: "Nafis Difaudin | Portfolio",
@@ -11,6 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="bg-black text-white">
       <body className="flex flex-col min-h-screen font-sans">
+        <CustomCursor />
         <Navbar />
         <main className="flex-1 container mx-auto px-6 py-12">{children}</main>
         <Footer />
