@@ -2,11 +2,13 @@ export default function HeroSection() {
   return (
     <section className="flex flex-col sm:flex-row items-center sm:items-start sm:justify-between gap-10">
       {/* Profile Image */}
-      <img
-        src="/images/profile.jpg"
-        alt="Profile"
-        className="w-36 h-36 sm:w-48 sm:h-48 rounded-full border-4 border-white shadow-lg"
-      />
+      <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-white shadow-lg shrink-0">
+        <img
+          src="/images/profile.jpg"
+          alt="Profile"
+          className="w-full h-full object-cover"
+        />
+      </div>
 
       {/* Text Content */}
       <div className="flex-1 text-left space-y-4">
