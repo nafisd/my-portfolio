@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, useTransform } from "framer-motion";
+import { useState } from "react";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -12,31 +13,77 @@ const navLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { scrollY } = useScroll();
+  const [scrolled, setScrolled] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setScrolled(latest > 40);
+  });
+
+  const bgOpacity = useTransform(scrollY, [0, 200], [0.05, 0.15]);
+  const blurValue = useTransform(scrollY, [0, 200], ["blur(8px)", "blur(16px)"]);
 
   return (
-    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] md:w-auto">
-      <nav className="backdrop-blur-md bg-white/5 border border-white/10 rounded-full px-6 md:px-8 py-3 flex items-center justify-center gap-8 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
-        {navLinks.map((link) => {
-          const isActive = pathname === link.href;
-          return (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="relative uppercase tracking-widest text-sm text-gray-200 hover:text-white transition"
-              data-magnet
-            >
-              {link.name}
-              {isActive && (
-                <motion.span
-                  layoutId="nav-underline"
-                  className="absolute left-0 -bottom-1 w-full h-[1.5px] bg-white rounded-full"
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                />
-              )}
-            </Link>
-          );
-        })}
+    <motion.header
+      style={{
+        backgroundColor: "rgba(255,255,255,0.03)",
+        backdropFilter: blurValue,
+      }}
+      animate={{
+        backgroundColor: scrolled
+          ? "rgba(255,255,255,0.08)"
+          : "rgba(255,255,255,0.03)",
+        borderBottom: scrolled
+          ? "1px solid rgba(255,255,255,0.15)"
+          : "1px solid rgba(255,255,255,0.05)",
+      }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="fixed top-0 left-0 w-full z-50"
+    >
+      <nav className="flex justify-between items-center px-6 md:px-12 py-4 text-sm uppercase tracking-widest text-gray-300">
+        {/* Logo */}
+        <Link
+          href="/"
+          className="font-semibold text-white hover:opacity-80 transition"
+          data-magnet
+        >
+          Nafis.dev
+        </Link>
+
+        {/* Navigation Links */}
+        <div className="flex items-center gap-8">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <div key={link.name} className="relative group">
+                <Link
+                  href={link.href}
+                  className={`transition ${
+                    isActive ? "text-white" : "hover:text-white"
+                  }`}
+                  data-magnet
+                >
+                  {link.name}
+                </Link>
+
+                {/* Active underline */}
+                {isActive && (
+                  <motion.span
+                    layoutId="nav-underline"
+                    className="absolute left-0 -bottom-1 w-full h-[1px] bg-white rounded-full"
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  />
+                )}
+
+                {/* Hover underline */}
+                {!isActive && (
+                  <span className="absolute left-0 -bottom-1 w-0 group-hover:w-full h-[1px] bg-white/60 transition-all duration-300"></span>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </nav>
-    </header>
+    </motion.header>
   );
 }
