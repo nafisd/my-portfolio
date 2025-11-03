@@ -9,3 +9,10 @@ body {
 a {
   transition: all 0.2s ease-in-out;
 }
+
+/* Hide default PC cursor, but keep touch cursor on mobile */
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}

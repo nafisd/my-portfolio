@@ -3,6 +3,9 @@ import { useEffect } from "react";
 
 export default function CustomCursor() {
   useEffect(() => {
+
+    if (window.matchMedia("(hover: none)").matches) return; // skip on mobile
+
     const cursor = document.createElement("div");
     cursor.id = "custom-cursor";
     document.body.appendChild(cursor);

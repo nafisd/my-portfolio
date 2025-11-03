@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function AnimatedHero() {
   const fullText =
-    "Front-End Developer • Laravel & Flutter | Building responsive and scalable experiences.";
+    "Nafis is a Front-End Developer with an engineering background, passionate about crafting modern, responsive, and user-friendly applications. Skilled in Laravel (Blade) and Flutter, he builds scalable web and mobile interfaces with a strong focus on clean UI/UX and maintainable design.";
   const [text, setText] = useState("");
 
   useEffect(() => {
