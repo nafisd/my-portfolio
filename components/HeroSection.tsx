@@ -22,13 +22,13 @@ export default function HeroSection() {
 
         <div className="flex flex-wrap gap-4 pt-4">
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/nafisd"
             className="border border-white px-4 py-2 rounded-full hover:bg-white hover:text-black transition"
           >
             GitHub
           </a>
           <a
-            href="mailto:yourmail@example.com"
+            href="mailto:nafisdifaudin97@gmail.com"
             className="border border-white px-4 py-2 rounded-full hover:bg-white hover:text-black transition"
           >
             Contact Me
